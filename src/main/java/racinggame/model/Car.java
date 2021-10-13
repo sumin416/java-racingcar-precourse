@@ -1,5 +1,7 @@
 package racinggame.model;
 
+import nextstep.utils.Randoms;
+
 public class Car {
     private String name;
     private int pos;
@@ -7,6 +9,12 @@ public class Car {
     public Car(String name, int pos) {
         this.name = name;
         this.pos = pos;
+    }
+
+    public void move(){
+        if(Randoms.pickNumberInRange(0, 9) >= 4) {
+            ++pos;
+        }
     }
 
     public String getName() {
