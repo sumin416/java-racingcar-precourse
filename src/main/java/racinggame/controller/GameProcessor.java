@@ -7,10 +7,13 @@ import racinggame.view.Script;
 public class GameProcessor {
 
     Car[] cars;
+    int count;
 
     public void gameStart() {
         System.out.println(Script.inputCarName.getMent());
         getCars();
+        System.out.println(Script.inputCount.getMent());
+        getCount();
     }
 
     private void getCars() {
@@ -20,6 +23,10 @@ public class GameProcessor {
         for (int i = 0; i < carNum; i++) {
             cars[i] = new Car(carNameArr[i], 0);
         }
+    }
+
+    private void getCount() {
+        count = Integer.parseInt(Console.readLine());
     }
 
 }
