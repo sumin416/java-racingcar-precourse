@@ -1,6 +1,7 @@
 package racinggame.controller;
 
 import nextstep.utils.Console;
+import racinggame.exception.WrongInputException;
 import racinggame.model.Car;
 import racinggame.view.Script;
 
@@ -10,10 +11,42 @@ public class GameProcessor {
     int count;
 
     public void gameStart() {
-        System.out.println(Script.inputCarName.getMent());
-        getCars();
-        System.out.println(Script.inputCount.getMent());
-        getCount();
+        do {
+        } while (!getCars());
+        do {
+        } while (!getCount());
+        play();
+        end();
+    }
+
+    private boolean getCars() {
+        try {
+            System.out.println(Script.inputCarName.getMent());
+            String[] carNameArr = Console.readLine().split(",");
+            int carNum = carNameArr.length;
+            cars = new Car[carNum];
+            for (int i = 0; i < carNum; i++) {
+                cars[i] = new Car(carNameArr[i], 0);
+                cars[i].checkName();
+            }
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private boolean getCount() {
+        try {
+            System.out.println(Script.inputCount.getMent());
+            count = Integer.parseInt(Console.readLine());
+            return true;
+        } catch (Exception e) {
+            new WrongInputException();
+            return false;
+        }
+    }
+
+    private void play() {
         System.out.println();
         System.out.println(Script.playResult.getMent());
 
@@ -23,21 +56,6 @@ public class GameProcessor {
             printCarPos();
             System.out.println();
         } while (++playCount < count);
-
-        System.out.println("최종 우승자는 " + getWinners() + " 입니다.");
-    }
-
-    private void getCars() {
-        String[] carNameArr = Console.readLine().split(",");
-        int carNum = carNameArr.length;
-        cars = new Car[carNum];
-        for (int i = 0; i < carNum; i++) {
-            cars[i] = new Car(carNameArr[i], 0);
-        }
-    }
-
-    private void getCount() {
-        count = Integer.parseInt(Console.readLine());
     }
 
     private void moveCars() {
@@ -58,6 +76,10 @@ public class GameProcessor {
             sb.append("-");
         }
         return sb.toString();
+    }
+
+    private void end() {
+        System.out.println("최종 우승자는 " + getWinners() + " 입니다.");
     }
 
     private String getWinners() {

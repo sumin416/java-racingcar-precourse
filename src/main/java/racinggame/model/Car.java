@@ -1,6 +1,7 @@
 package racinggame.model;
 
 import nextstep.utils.Randoms;
+import racinggame.exception.WrongInputException;
 
 public class Car {
     private String name;
@@ -15,6 +16,10 @@ public class Car {
         if (Randoms.pickNumberInRange(0, 9) >= 4) {
             ++pos;
         }
+    }
+
+    public void checkName() throws WrongInputException {
+        if (name.length() > 5) throw new WrongInputException();
     }
 
     public String getName() {
