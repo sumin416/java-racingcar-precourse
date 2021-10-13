@@ -23,6 +23,8 @@ public class GameProcessor {
             printCarPos();
             System.out.println();
         } while (++playCount < count);
+
+        System.out.println("최종 우승자는 " + getWinners() + " 입니다.");
     }
 
     private void getCars() {
@@ -54,6 +56,22 @@ public class GameProcessor {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < pos; i++) {
             sb.append("-");
+        }
+        return sb.toString();
+    }
+
+    private String getWinners() {
+        StringBuilder sb = new StringBuilder();
+        int winPos = -1;
+        for (int i = 0; i < cars.length; i++) {
+            if (cars[i].getPos() > winPos) {
+                winPos = cars[i].getPos();
+                sb.setLength(0);
+                sb.append(cars[i].getName());
+            } else if (cars[i].getPos() == winPos) {
+                sb.append(",");
+                sb.append(cars[i].getName());
+            }
         }
         return sb.toString();
     }
