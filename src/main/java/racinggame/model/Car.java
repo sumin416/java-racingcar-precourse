@@ -11,8 +11,8 @@ public class Car {
         this.pos = pos;
     }
 
-    public void move(){
-        if(Randoms.pickNumberInRange(0, 9) >= 4) {
+    public void move() {
+        if (Randoms.pickNumberInRange(0, 9) >= 4) {
             ++pos;
         }
     }

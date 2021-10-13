@@ -14,6 +14,15 @@ public class GameProcessor {
         getCars();
         System.out.println(Script.inputCount.getMent());
         getCount();
+        System.out.println();
+        System.out.println(Script.playResult.getMent());
+
+        int playCount = 0;
+        do {
+            moveCars();
+            printCarPos();
+            System.out.println();
+        } while (++playCount < count);
     }
 
     private void getCars() {
@@ -29,4 +38,23 @@ public class GameProcessor {
         count = Integer.parseInt(Console.readLine());
     }
 
+    private void moveCars() {
+        for (int i = 0; i < cars.length; i++) {
+            cars[i].move();
+        }
+    }
+
+    private void printCarPos() {
+        for (int i = 0; i < cars.length; i++) {
+            System.out.println(cars[i].getName() + " : " + printPos(cars[i].getPos()));
+        }
+    }
+
+    private String printPos(int pos) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < pos; i++) {
+            sb.append("-");
+        }
+        return sb.toString();
+    }
 }
